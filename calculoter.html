@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+    <link
+      rel="stylesheet"
+      href="../../node_modules/bootstrap/dist/css/bootstrap.css"
+    />
+    <script type="text/javascript">
+      function amountchange() {
+        document.getElementById("txtamount").value =
+          document.getElementById("rangeamount").value;
+      }
+      function yearchange() {
+        document.getElementById("txtyears").value =
+          document.getElementById("rangeyear").value;
+      }
+      function ratechange() {
+        document.getElementById("txtrate").value =
+          document.getElementById("rangerate").value;
+      }
+      function calculateclick(){
+        var p=parseInt(document.getElementById("txtamount").value);
+        var n= parseInt(document.getElementById("txtyears").value)*12;
+        var r= parseFloat(document.getElementById("txtrate").value)/12/100;
+        var emi = p*r*Math.pow((1+r),n)/Math.pow((1+r),n)-1;
+        document.getElementById("result").innerHTML="your montly installment amount is &#8377;"+Math.round(emi)+"for"+(n/12)+"yeras with"+ document.getElementById("txtrate").value+"% interst rate";
+      }
+    </script>
+  </head>
+  <body class="container-fluid">
+    <h2>Emi calculator</h2>
+    <div style="box-shadow: 2px 2px 2px gray; padding: 20px">
+      <div class="row mt-4">
+        <div class="col">
+          Amount you need &#8377; <input type="text" id="txtamount" size="15" />
+        </div>
+        <div class="col">
+          for <input type="text" id="txtyears" size="2" />years
+        </div>
+        <div class="col">
+          interest rate <input type="text" id="txtrate" size="4" />%
+        </div>
+      </div>
+      <div class="row mt-4">
+        <div class="col">
+          <div class="input-group">
+            <span>&#8377; 50,000</span>
+            <div>
+              <input
+                class="form-range mx-2"
+                type="range"
+                id="rangeamount"
+                value="50000"
+                min="50000"
+                max="1000000"
+                value="50000"
+                onchange="amountchange()"
+              />
+            </div>
+            <span class="ms-2">&#8377; 1000000</span>
+          </div>
+        </div>
+        <div class="col">
+          <div class="input-group">
+            <span>1</span>
+            <div>
+              <input
+                class="form-range mx-2"
+                type="range"
+                id="rangeyear"
+                value="1 years"
+                min="1"
+                max="5"
+                step="1"
+                onchange="yearchange()"
+              />
+            </div>
+            <span class="ms-2">5</span>
+          </div>
+        </div>
+        <div class="col">
+          <div class="input-group">
+            <span>10.45</span>
+            <div>
+              <input
+                class="form-range mx-2"
+                type="range"
+                id="rangerate"
+                value="10.45 years"
+                min="10.45"
+                max="20.25"
+                step="1"
+                onchange="ratechange()"
+              />
+            </div>
+            <span class="ms-2">20.25</span>
+          </div>
+        </div>
+      </div>
+      <div class="row mt-4">
+        <div class="col text-end">
+          <button onclick="calculateclick()" class="btn btn-primary">
+            Calculate
+          </button>
+        </div>
+      </div>
+    </div>
+    <h2 class="text-center mt-3" id="result"></h2>
+  </body>
+</html>
